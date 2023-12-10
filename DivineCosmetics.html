@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Divine Cosmetics</title>
+    <link rel="stylesheet" href="DivineCosmetics.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+
+    
+    <header class="headerContainer">
+        <div class="BgAndFirm">
+            <p class="Firm">Divine Cosmetics</p>
+     
+        </div>
+      
+        <ul class="lista">
+            
+            <a class="lija" href="NewDivine.html">NEW</a>
+            <a class="lija" href="CollectionsDivine.html">COLLECTIONS</a>
+            <a class="lija" href="LipsDivine.html">LIPS</a>
+            <a class="lija" href="CheekDivine.html">CHEEK</a>
+            <a class="lija" href="EyesDivine.html">EYES</a>
+            <a class="lija" href="FaceDivine.html">FACE</a>
+         
+        </ul>
+
+        
+        <div class="icons">
+          <div class="fa fa-search"id="search-btn"></div>
+               <form class="search-form">
+            <input type="search" id="search-box" placeholder="Search Here...">
+        </form>
+          <a id="cart-btn" href="Shoppingcart.html">
+          <div class="fa fa-shopping-cart"></div>
+        </a>
+             <!-- User Icon with onclick and id attributes -->
+        <a id="login-btn" href="RegisterLoginForm.html">
+            <div class="fa fa-user"></div>
+        </a>
+   
+</div>
+   
+  
+    </header>
+    <main>
+        
+        <div class="bgPhoto">
+            <img src="nars.jpg" alt="background" height="434px" width="1502.8px">
+            <div class="text">
+            <h1>PERFECTION,<br>POWER ON US</h1>
+        </div>
+        <button class="button">SHOP NOW</button>
+        </div>
+        
+      
+            <div class="NEWARRIVALS">
+                <p2 class="NEWARRIVALS">NEW ARRIVALS</p2> 
+            </div>
+        <div class="photos"></div>
+            <div class="wrapper">
+                <i id="left" class="fa-solid fa-angle-left"></i>
+                <div class="carousel">
+               
+                  <img src="Nars blush.jpg" alt="img" draggable="false">
+                  <img src="eyeshadow1.jpg" alt="img" draggable="false">
+                  <img src="NARS LIPSTICK.jpg" alt="img" draggable="false">
+                  <img src="lipgloss11.jpg" alt="img" draggable="false">  
+                 <img src="maybelline-navigation superstay skintint.jpg" alt="img" draggable="false">
+                  <img src="MAYBELLINE Lash.jpg" alt="img" draggable="false">
+                </div>
+                <i id="right" class="fa-solid fa-angle-right"></i>
+              </div>
+           <script>
+            const carousel = document.querySelector(".carousel"),
+firstImg = carousel.querySelectorAll("img")[0],
+arrowIcons = document.querySelectorAll(".wrapper i");
+let isDragStart = false, isDragging = false, prevPageX, prevScrollLeft, positionDiff;
+const showHideIcons = () => {
+    // showing and hiding prev/next icon according to carousel scroll left value
+    let scrollWidth = carousel.scrollWidth - carousel.clientWidth; // getting max scrollable width
+    arrowIcons[0].style.display = carousel.scrollLeft == 0 ? "none" : "block";
+    arrowIcons[1].style.display = carousel.scrollLeft == scrollWidth ? "none" : "block";
+}
+arrowIcons.forEach(icon => {
+    icon.addEventListener("click", () => {
+        let firstImgWidth = firstImg.clientWidth + 14; // getting first img width & adding 14 margin value
+        // if clicked icon is left, reduce width value from the carousel scroll left else add to it
+        carousel.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
+        setTimeout(() => showHideIcons(), 60); // calling showHideIcons after 60ms
+    });
+});
+const autoSlide = () => {
+    // if there is no image left to scroll then return from here
+    if(carousel.scrollLeft - (carousel.scrollWidth - carousel.clientWidth) > -1 || carousel.scrollLeft <= 0) return;
+    positionDiff = Math.abs(positionDiff); // making positionDiff value to positive
+    let firstImgWidth = firstImg.clientWidth + 14;
+    // getting difference value that needs to add or reduce from carousel left to take middle img center
+    let valDifference = firstImgWidth - positionDiff;
+    if(carousel.scrollLeft > prevScrollLeft) { // if user is scrolling to the right
+        return carousel.scrollLeft += positionDiff > firstImgWidth / 3 ? valDifference : -positionDiff;
+    }
+    // if user is scrolling to the left
+    carousel.scrollLeft -= positionDiff > firstImgWidth / 3 ? valDifference : -positionDiff;
+}
+const dragStart = (e) => {
+    // updatating global variables value on mouse down event
+    isDragStart = true;
+    prevPageX = e.pageX || e.touches[0].pageX;
+    prevScrollLeft = carousel.scrollLeft;
+}
+const dragging = (e) => {
+    // scrolling images/carousel to left according to mouse pointer
+    if(!isDragStart) return;
+    e.preventDefault();
+    isDragging = true;
+    carousel.classList.add("dragging");
+    positionDiff = (e.pageX || e.touches[0].pageX) - prevPageX;
+    carousel.scrollLeft = prevScrollLeft - positionDiff;
+    showHideIcons();
+}
+const dragStop = () => {
+    isDragStart = false;
+    carousel.classList.remove("dragging");
+    if(!isDragging) return;
+    isDragging = false;
+    autoSlide();
+}
+carousel.addEventListener("mousedown", dragStart);
+carousel.addEventListener("touchstart", dragStart);
+document.addEventListener("mousemove", dragging);
+carousel.addEventListener("touchmove", dragging);
+document.addEventListener("mouseup", dragStop);
+carousel.addEventListener("touchend", dragStop);
+           </script>
+        </div>
+        <div class="container">
+            <div class="category-text">SHOP BY CATEGORY</div>
+            <hr class="h">
+            <div class="image">
+                <div class="image-container">
+                    <img src="face.jpg" alt="Img 1">
+                    <div class="image-text">FACE</div>
+                </div>
+                <div class="image-container">
+                    <img src="lipimg.jpg" alt="Img 2">
+                    <div class="image-text">LIP</div>
+                </div>
+                <div class="image-container">
+                    <img src="cheekimg.jpg" alt="Img 3">
+                    <div class="image-text">CHEEK</div>
+                </div>
+                <div class="image-container">
+                    <img src="eyeimg.jpg" alt="Img 4">
+                    <div class="image-text">EYE</div>
+                </div>
+            </div>
+        </div>
+        <!-- products section -->
+           
+        <div class="foto"> 
+            <!-- Product 1 -->
+            <div class="artikulli">
+                <img src="MaxFactor-LIPFINITY LIQUID LIPSTICK.jpg" alt="Image 1">
+            <p>LIPFINITY LIQUID</p>
+            <p>LIPSTICK</p>
+                <p class="price">$15.00</p>
+                <p class="stars">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half"></i>
+                   
+                </p>
+                 <button>Add to Cart</button>
+                </div>
+                <div class="artikulli">
+                    <img src="LASHESDUO.jpg" alt="Image 2">
+                    <p>CHAT WITH AN ARTIST</p>
+                    <p>LUST-HAVE LASHES DUO</p>
+                    <p class="price">$36.00</p>
+                    <p class="stars">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="artikulli">
+                    <img src="LIPSET.jpg" alt="Image 3">
+                    <p>CHELSEA GIRLS &</p>
+                    <p>SUPERVIXEN AFTERGLOW  LIP SET</p>
+                    <p class="price">$36.40</p>
+                    <p class="stars">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half"></i>
+                    </p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="artikulli">
+                    <img src="FOUNDATION.jpg" alt="Image 4">
+                    <p>NARS-LIGHT REFLECTING ADVANCED  </p>
+                    <p> SKINCARE FOUNDATION </p>
+                    <p class="price">$50.00</p>
+                    <p class="stars">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half"></i>
+                    </p>
+                    <button>Add to Cart</button>
+                </div>
+                    <!-- Second row of photos -->
+                    <div class="artikulli">
+                        <img src="NARSBLUSH22.jpg" alt="Image 5">
+                        <p>NARS-VALUE DOUBLE </p>
+                        <p> ORGASM BLUSH SET </p>
+                        <p class="price">$64.00</p>
+                        <p class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half"></i>
+                        </p>
+                        <button>Add to Cart</button>
+                    </div>
+                     <div class="artikulli">
+                            <img src="ALL THAT GLITTERS LIGHT REFLECTING CHEEK PALETTE.jpg" alt="Image 6">
+                            <p>ALL THAT GLITTERS LIGHT  </p>
+                            <p>REFLECTING CHEEK PALETTE </p>
+                            <p class="price">$60.00</p>
+                            <p class="stars">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </p>
+                            <button>Add to Cart</button>
+                        </div>
+                    <div class="artikulli">
+                            <img src="ANASTASIA Beverly Hills-Deluxe Mini Lip Liner Set.jpg" alt="Image 7">
+                            <p>ANASTASIA Beverly Hills-Deluxe </p>
+                            <p>Mini Lip Liner Set</p>
+                            <p class="price">$52.00</p>
+                            <p class="stars">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half"></i>
+                            </p>
+                            <button>Add to Cart</button>
+                        </div>
+                    <div class="artikulli">
+                            <img src="NARS-POWERMATTE LIPSTICK.jpg" alt="Image 8">
+                            <p>POWERMATTE HIGH-INTENSITY</p>
+                            <p>LIP PENCIL</p>
+                            <p class="price">$32.00</p>
+                            <p class="stars">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </p>
+                            <button>Add to Cart</button>
+                    </div>
+                    <div class="artikulli">
+                        <img src="FACEFINITY MULTI-PERFECTOR CONCEALER.jpg" alt="Image 1">
+                    <p>FACEFINITY MULTI-PERFECTOR CONCEALER</p>
+                        <p class="price">$23.66</p>
+                        <p class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half"></i>
+                           
+                        </p>
+                         <button>Add to Cart</button>
+                        </div>
+                  </div>
+            
+     
+     </main>
+     <footer>
+  <div class="container">
+    <div class="row">
+                    <div class="footer-col">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Our Servives</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Affilate Program</a></li>
+                        </ul>
+                    </div>
+    
+                    <div class="footer-col">
+                        <h4>Get Help</h4>
+                        <ul>
+                            <li><a href="#">Faq</a></li>
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="#">Returns</a></li>
+                            <li><a href="#">Order Status</a></li>
+                        </ul>
+                    </div>
+    
+                    <div class="footer-col">
+                        <h4>Online Shopping</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Our Servives</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Affilate Program</a></li>
+                        </ul>
+                    </div>
+    
+                    <div class="footer-col">
+                        <h4>Follow us</h4>
+                        <div class="social-link">
+                            <a href="#"><i class="fa fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+    
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+        </footer>
+
+           
+</body>
+ </html>
+     
